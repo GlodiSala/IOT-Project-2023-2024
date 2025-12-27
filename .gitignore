@@ -1,0 +1,25 @@
+# Build files
+*.o
+*.elf
+*.bin
+*.hex
+
+# PlatformIO
+.pio/
+.vscode/
+.pioenvs/
+.piolibdeps/
+
+# Arduino
+*.out
+*.map
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+
+# Temporary files
+*.tmp
+*.bak
+*~
