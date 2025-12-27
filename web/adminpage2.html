@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page - Orders</title>
+    <style>
+        /* CSS styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f1f7f8;
+            color: #2d2d2d;
+        }
+
+        .button-container {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            z-index: 1;
+        }
+
+        .button-container button {
+            background-color: #14387a;
+            border: none;
+            border-radius: 18px;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button-container button:hover {
+            background-color: #7dbce3;
+        }
+
+        .button-container button:active {
+            background-color: #454ea0;
+        }
+
+        h3 {
+            color: #14387a;
+            padding-bottom: 20px;
+            padding-top: 60px;
+            padding-left: 100px;
+            font-size: 2.5em;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fbf7f7d3;
+            
+        }
+
+        th,
+        td {
+            
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            
+        }
+
+        th {
+            background-color: hsla(195, 73%, 90%, 0.832);
+        }
+
+        
+        
+        td:hover {
+            background-color: #f2f2f2;
+            
+            font-size: 1.5em;
+        }
+
+        td {
+            width: 150px; /* Adjust the width as needed */
+            height: 150px; /* Set the same value to make them square */
+            cursor: pointer;
+            vertical-align: top; 
+            padding: 20px;
+        }
+
+        
+
+        .snackbutton-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .snackbutton-container button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #14387a;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .snackbutton-container button:hover {
+            background-color: #4587b0;
+        }
+
+        #calendarContainer {
+            margin-bottom: 20px;
+            display: none; /* Hide the yearly calendar initially */
+        }
+
+        #selectPeriod {
+            margin-bottom: 10px;
+            display: block;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: underline;
+            color: #007bff;
+            cursor: pointer;
+        }
+      
+        /* Added styles */
+        .calendar-table td {
+            width: 25%;
+            border-right: 1px solid #ddd; /* Vertical lines */
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Add your additional styles here */
+    </style>
+</head>
+
+<body>
+    <div class="button-container">
+        <button onclick="window.location.href='/home'">Home</button>
+        <button onclick="window.location.href='/login'">Login</button>
+        <button onclick="window.location.href='/products'">Snacks</button>
+    </div>
+    <h3 id="ordersTitle">Orders</h3>
+    <div class="container">
+        <a id="selectPeriod" onclick="toggleCalendar()">Monthly Orders Overview</a>
+        <div id='calendarContainer'>
+            <!-- Yearly calendar will be inserted here -->
+            <table id="calendarTable" class="calendar-table">
+                <thead>
+                    <tr>
+                        <th colspan="4">Months - <span id="currentYear"></span></th>
+                    </tr>
+                </thead>
+                <tbody id="monthTableBody">
+                    <!-- Month names will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>Order Number</th>
+                    <th>Name</th>
+                    <th>Email address</th>
+                    <th>Date</th>
+                    <th>Total price</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="orderRows">
+                <!-- Order details will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+         $(function() {
+            // Function to generate the month table
+            function generateMonthTable() {
+                var monthHtml = '';
+                var monthNames = [
+                    "January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ];
+                for (var i = 0; i < 12; i += 4) {
+                    monthHtml += '<tr>';
+                    for (var j = i; j < i + 4; j++) {
+                        monthHtml += '<td data-month="' + (j + 1) + '">' + monthNames[j] + '</td>';
+                    }
+                    monthHtml += '</tr>';
+                }
+                $("#monthTableBody").html(monthHtml);
+            }
+
+            // Initially generate the month table
+            generateMonthTable();
+
+            // Display current year next to "Months" header
+            var currentYear = new Date().getFullYear();
+            $("#currentYear").text(currentYear);
+
+            // Event listener for selecting a month
+            $("#calendarContainer").on("click", "td[data-month]", function() {
+                var selectedMonth = $(this).data('month');
+                var selectedDate = currentYear + '-' + selectedMonth.toString().padStart(2, '0') + '-01'; //YYYY-MM-DD format
+                handleDateSelect(selectedDate);
+            });
+        });
+        var calendar;
+
+        function toggleCalendar() {
+            var calendarEl = document.getElementById('calendarContainer');
+            var selectPeriod = document.getElementById('selectPeriod');
+
+            if (calendarEl.style.display === 'none') {
+                // Show the calendar when Select period is clicked
+                calendarEl.style.display = 'block';
+            } else {
+                // Hide the calendar if it's already visible
+                calendarEl.style.display = 'none';
+            }
+        }
+
+        function handleDateSelect(selectedDate) {
+            // Now you can use the selectedDate to fetch data for that date from the server
+            // For demonstration purposes, I'll just log the selected date to the console
+          
+            console.log('Selected date:', selectedDate);
+
+            var selectedMonth = selectedDate.substring(5, 7);
+            var selectedYear = selectedDate.substring(0, 4);
+            var ordersTitle = document.getElementById('ordersTitle');
+            ordersTitle.innerHTML = 'Orders - ' + selectedMonth + '/' + selectedYear;
+
+            // Hide the calendar after selecting a date
+            var calendarEl = document.getElementById('calendarContainer');
+            calendarEl.style.display = 'none';
+
+            var urlParams = new URLSearchParams(window.location.search);
+            var token = urlParams.get('token');
+
+            // Redirect to the adminpage with the selected date and token as query parameters
+            window.location.href = '/adminpage?date=' + selectedDate + '&token=' + token;
+        }
+    </script>
+</body>
+
+</html>

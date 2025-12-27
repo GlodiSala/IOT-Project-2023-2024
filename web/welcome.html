@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snack Bar - Welcome Page</title>
+    <style>
+        /* Relevant CSS styles for the welcome page */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f1f7f8;
+            color: #2d2d2d;
+        }
+        .button-container {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            z-index: 1;
+        }
+        .button-container button {
+            background-color: #14387a;
+            border: none;
+            border-radius: 18px;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .button-container button:hover {
+            background-color: #7dbce3;
+        }
+        .button-container button:active {
+            background-color: #454ea0;
+        }
+        .message-container {
+            width: 80%;
+            margin: 100px auto;
+            background-color: hsl(194, 71%, 90%);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .message-container h2 {
+            text-align: center;
+            color: #14387a;
+            font-size: 2em;
+        }
+        .message-container p {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .unique-id {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .instructions {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .instructions p {
+            margin-bottom: 10px;
+        }
+        .snackbutton-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .snackbutton-container button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #14387a;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .snackbutton-container button:hover {
+            background-color: #4587b0;
+        }
+    </style>
+</head>
+<body>
+    <div class="message-container">
+        <h2>Welcome [USERNAME]!</h2>
+        <p>Thank you for signing up!</p>
+        <div class="unique-id">
+            Your Unique ID: <span id="unique-id">[CLIENT_ID]</span>
+        </div>
+        <div class="instructions">
+            <p>You can now login using your email address</p>
+            <p>You can also place orders on the device using this ID and your PIN code.</p>
+        </div>
+        <div class="snackbutton-container">
+            <button onclick="window.location.href='/login'">Login</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snack Bar - Home</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f1f7f8;
+            color: #2d2d2d;
+        }
+
+        .button-container {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            z-index: 1;
+        }
+
+        .button-container button {
+            background-color: #14387a;
+            border: none;
+            border-radius: 18px;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button-container button:hover {
+            background-color: #7dbce3;
+        }
+
+        .button-container button:active {
+            background-color: #454ea0;
+        }
+
+        .home-container {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .header-container {
+            background-color: hsl(194, 71%, 90%);
+            text-align: center;
+            padding-top: 40px;
+            padding-bottom: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .header-container .title {
+            font-size: 6em;
+            font-weight: 750;
+            padding: 0px 20px;
+            color: rgb(56, 55, 55);
+            margin-bottom: 10px;
+        }
+
+        .header-container .small-text {
+            font-style: normal;
+            font-size: 1.4em;
+            color: rgb(74, 74, 74);
+        }
+
+        .content-text {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: rgb(51, 50, 50);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="button-container">
+        <button onclick="window.location.href='/home'">Home</button>
+        <button onclick="window.location.href='/login'">Login</button>
+        <button onclick="window.location.href='/products'">Snacks</button>
+    </div>
+
+    <div class="home-container">
+        <div class="header-container">
+            <div class="title">Snack Bar</div>
+            <div class="small-text">Welcome to the snack bar :)</div>
+        </div>
+        <div class="content-container">
+            <div class="content-text">
+                Here is how the Snack Bar works :
+                <ul>
+                    <li>First, sign up to create an account and receive a unique ID to use when making purchases on the device with a PIN code of your choice</li>
+                    <li>Then, you can log in to access your past purchases</li>
+                    <li>After logging in, you also have the option to view the snacks in stock and add or modify the available snacks</li>
+                </ul>
+                Enjoy your snack and bon appétit ;)
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

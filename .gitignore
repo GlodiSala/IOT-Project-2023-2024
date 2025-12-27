@@ -4,20 +4,10 @@
 *.bin
 *.hex
 
-# PlatformIO
-.pio/
+# IDE files
 .vscode/
-.pioenvs/
-.piolibdeps/
-
-# Arduino
-*.out
-*.map
-
-# OS files
 .DS_Store
 Thumbs.db
-*.swp
 
 # Temporary files
 *.tmp

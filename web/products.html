@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snack Bar - Snacks</title>
+    <style>
+        /* CSS styles */
+        body { margin: 0; padding: 0; font-family: 'Roboto', Arial, sans-serif; background-color: #f1f7f8; color: #2d2d2d; }
+        .button-container { position: absolute; top: 20px; right: 40px; z-index: 1; }
+        .button-container button { background-color: #14387a; border: none; border-radius: 18px; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; }
+        .button-container button:hover { background-color: #7dbce3; }
+        .button-container button:active { background-color: #454ea0; }
+        .container { width: 80%; margin: 20px auto; }
+        table { width: 100%; border-collapse: collapse; background-color: #fbf7f7d3; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: hsla(195, 73%, 90%, 0.832); }
+        tr:hover { background-color: #f2f2f2; }
+        .snackbutton-container { text-align: center; margin-top: 40px; }
+        .snackbutton-container button { padding: 10px 20px; margin: 0 10px; background-color: #14387a; color: #fff; border: none; border-radius: 8px; cursor: pointer; }
+        .snackbutton-container button:hover { background-color: #4587b0; }
+        h4 { color: #14387a; padding-bottom: 10px; padding-top: 20px; font-size: 2.5em; }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="button-container">
+        <button onclick="window.location.href='/home'">Home</button>
+        <button onclick="window.location.href='/login'">Login</button>
+        <button onclick="window.location.href='/products'">Snacks</button>
+    </div>
+    <div class="container">
+        <h4>Snacks</h4>
+        <table id="snackTable">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Per unit price</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Snack data will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+    <div class="snackbutton-container">
+        <button onclick="window.open('/add_product?token=INSERT_TOKEN_HERE', '_blank'); window.close();">Add Snack</button>
+    </div>
+    <script>
+        // JavaScript functions for editing and deleting rows
+        function editRow(button, id, token) {
+            var row = button.parentNode.parentNode;
+            var cells = row.getElementsByTagName('td');
+            var name = cells[0].innerText;
+            var quantity = cells[1].innerText;
+            var price = cells[2].innerText;
+            var newName = prompt('Enter new product name:', name);
+            var newQuantity = prompt('Enter new quantity:', quantity);
+            var newPrice = prompt('Enter new price:', price);
+            if (newName && newQuantity && newPrice) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        window.location.reload(); // Reload the page after successful update
+                    }
+                };
+                xhttp.open('POST', '/edit_product?token=' + token, true);
+                xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhttp.send('id=' + encodeURIComponent(id) + '&name=' + encodeURIComponent(newName) + '&quantity=' + encodeURIComponent(newQuantity) + '&price=' + encodeURIComponent(newPrice));
+            }
+        }
+
+        function deleteRow(button, id, token) {
+            var row = button.parentNode.parentNode;
+            var name = row.cells[0].innerText;
+            if (confirm('Are you sure you want to delete ' + name + '?')) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        window.location.reload(); // Reload the page after successful deletion
+                    }
+                };
+                xhttp.open('POST', '/delete_product?token=' + token, true);
+                xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhttp.send('id=' + encodeURIComponent(id));
+            }
+        }
+    </script>
+</body>
+</html>

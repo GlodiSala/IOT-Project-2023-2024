@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page - Orders</title>
+    <style>
+        /* CSS styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f1f7f8;
+            color: #2d2d2d;
+        }
+
+        .button-container {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            z-index: 1;
+        }
+
+        .button-container button {
+            background-color: #14387a;
+            border: none;
+            border-radius: 18px;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button-container button:hover {
+            background-color: #7dbce3;
+        }
+
+        .button-container button:active {
+            background-color: #454ea0;
+        }
+
+        h3 {
+            color: #14387a;
+            padding-bottom: 20px;
+            padding-top: 60px;
+            padding-left: 100px;
+            font-size: 2.5em;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fbf7f7d3;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: hsla(195, 73%, 90%, 0.832);
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        .snackbutton-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .snackbutton-container button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #14387a;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .snackbutton-container button:hover {
+            background-color: #4587b0;
+        }
+
+        #calendar {
+            margin-bottom: 20px;
+            display: none; /* Hide the calendar initially */
+        }
+
+        #selectPeriod {
+            margin-bottom: 10px;
+            display: block;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: underline;
+            color: #007bff;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+</head>
+
+<body>
+    <div class="button-container">
+        <button onclick="window.location.href='/home'">Home</button>
+        <button onclick="window.location.href='/login'">Login</button>
+        <button onclick="window.location.href='/products'">Snacks</button>
+    </div>
+    <h3 id="ordersTitle">Orders</h3>
+    <div class="container">
+        <a id="selectPeriod" onclick="toggleCalendar()">Select period</a>
+        <div id='calendar'></div>
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>Order Number</th>
+                    <th>Name</th>
+                    <th>Email address</th>
+                    <th>Date</th>
+                    <th>Total price</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="orderRows">
+                <!-- Order details will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        var calendar;
+
+        function toggleCalendar() {
+            var calendarEl = document.getElementById('calendar');
+            var selectPeriod = document.getElementById('selectPeriod');
+
+            if (calendarEl.style.display === 'none') {
+                // Show the calendar when Select period is clicked
+                calendarEl.style.display = 'block';
+
+                // Initialize FullCalendar
+                calendar = new FullCalendar.Calendar(calendarEl, {
+                    // Set your desired options here
+                    initialView: 'dayGridMonth', // Display the calendar in month view
+                    selectable: true,
+                    select: handleDateSelect // Callback when a date is selected
+                });
+
+                calendar.render();
+
+                // Remove the onclick event listener to prevent multiple calendar renders
+            } else {
+                // Hide the calendar if it's already visible
+                calendarEl.style.display = 'none';
+            }
+        }
+
+        function handleDateSelect(arg) {
+            var selectedDate = arg.startStr; // Get the selected date in string format (YYYY-MM-DD)
+            
+            // Now you can use the selectedDate to fetch data for that date from the server
+            // For demonstration purposes, I'll just log the selected date to the console
+            console.log('Selected date:', selectedDate);
+
+            var selectedMonth = selectedDate.substring(5, 7);
+            var selectedYear = selectedDate.substring(0, 4);
+            var ordersTitle = document.getElementById('ordersTitle');
+            ordersTitle.innerHTML = 'Orders - ' + selectedMonth + '/' + selectedYear;
+            
+            // Hide the calendar after selecting a date
+            var calendarEl = document.getElementById('calendar');
+            calendarEl.style.display = 'none';
+            
+            var urlParams = new URLSearchParams(window.location.search);
+            var token = urlParams.get('token');
+        
+            // Redirect to the adminpage with the selected date and token as query parameters
+            window.location.href = '/adminpage?date=' + selectedDate + '&token=' + token;
+
+         
+        }
+    </script>
+</body>
+
+</html>
