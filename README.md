@@ -232,4 +232,3 @@ Special thanks to:
 
 ---
 
-⭐ **If you find this project interesting, please give it a star!**
