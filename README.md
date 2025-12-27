@@ -102,8 +102,7 @@ The database consists of **4 interconnected tables**:
 ---
 
 ## Project Structure
-
-\\\
+```
 IOT-Project-2023-2024/
 â”œâ”€â”€ src/                   # Embedded C/C++ code
 â”‚   â””â”€â”€ Biometric_Project_V5.ino
@@ -121,7 +120,7 @@ IOT-Project-2023-2024/
 â””â”€â”€ docs/                  # Documentation
     â”œâ”€â”€ diagrams/          # Hardware schematics
     â””â”€â”€ images/            # Web interface screenshots
-\\\
+```
 
 ---
 
@@ -135,8 +134,7 @@ IOT-Project-2023-2024/
 4. Power via USB or lithium battery
 
 ### Software Installation
-
-\\\ash
+```bash
 # 1. Clone repository
 git clone https://github.com/GlodiSala/IOT-Project-2023-2024.git
 cd IOT-Project-2023-2024
@@ -146,7 +144,7 @@ cd IOT-Project-2023-2024
 #define WIFI_PASSWORD "your_password"
 
 # 3. Upload to ESP32 via Arduino IDE
-\\\
+```
 
 ### Access Web Interface
 
