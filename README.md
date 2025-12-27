@@ -55,7 +55,7 @@ This project modernizes the ETRO laboratory snack bar by replacing the tradition
 
 ![Order Process](docs/diagrams/Command.png)
 
-*Complete order flow: Menu â†’ Authentication â†’ Selection â†’ Confirmation â†’ Database Update*
+*Complete order flow: Menu → Authentication → Selection → Confirmation → Database Update*
 
 ![System Integration](docs/diagrams/SchemaGlobal.jpg)
 
@@ -104,22 +104,22 @@ The database consists of **4 interconnected tables**:
 ## Project Structure
 ```
 IOT-Project-2023-2024/
-â”œâ”€â”€ src/                   # Embedded C/C++ code
-â”‚   â””â”€â”€ Biometric_Project_V5.ino
-â”‚
-â”œâ”€â”€ web/                   # HTML pages (9 total)
-â”‚   â”œâ”€â”€ home.html
-â”‚   â”œâ”€â”€ login.html
-â”‚   â”œâ”€â”€ userpage.html
-â”‚   â””â”€â”€ ...
-â”‚
-â”œâ”€â”€ database/              # SQLite database
-â”‚   â”œâ”€â”€ snacks.db
-â”‚   â””â”€â”€ snacks.sqbpro
-â”‚
-â””â”€â”€ docs/                  # Documentation
-    â”œâ”€â”€ diagrams/          # Hardware schematics
-    â””â”€â”€ images/            # Web interface screenshots
+├── src/                   # Embedded C/C++ code
+│   └── Biometric_Project_V5.ino
+│
+├── web/                   # HTML pages (9 total)
+│   ├── home.html
+│   ├── login.html
+│   ├── userpage.html
+│   └── ...
+│
+├── database/              # SQLite database
+│   ├── snacks.db
+│   └── snacks.sqbpro
+│
+└── docs/                  # Documentation
+    ├── diagrams/          # Hardware schematics
+    └── images/            # Web interface screenshots
 ```
 
 ---
@@ -160,8 +160,8 @@ cd IOT-Project-2023-2024
 
 - **Microcontroller:** ESP32 (240MHz, 16MB Flash)
 - **Communication:** I2C, SPI, WiFi
-- **Display:** 4.37" E-Paper, 512x368 pixels, 4-color
-- **Input:** 4x4 matrix keypad (16 keys)
+- **Display:** 4.37" E-Paper, 512×368 pixels, 4-color
+- **Input:** 4×4 matrix keypad (16 keys)
 - **Power:** USB 5V or Li-Ion battery (3.7V)
 
 ### Software
@@ -186,20 +186,20 @@ cd IOT-Project-2023-2024
 ## Authors
 
 **Miranda Ndayisaba**  
-Email: miranda.ndayisaba@ulb.be  
-Institution: ULB-VUB Brussels
+📧 miranda.ndayisaba@ulb.be  
+🏫 ULB-VUB Brussels
 
 **Glodi Sala Mangituka**  
-Email: glodi.sala.mangituka@ulb.be  
-LinkedIn: [glodi-sala-mangituka](https://linkedin.com/in/glodi-sala-mangituka)  
-GitHub: [GlodiSala](https://github.com/GlodiSala)
+📧 glodi.sala.mangituka@ulb.be  
+🔗 [LinkedIn](https://www.linkedin.com/in/glodi-sala-mangituka-762616280/)  
+🐙 [GitHub](https://github.com/GlodiSala)
 
 ---
 
 ## Academic Context
 
 **Course:** PROJ-H415 - Project Electronics and Telecommunication  
-**Institution:** Universite Libre de Bruxelles (ULB) / Vrije Universiteit Brussel (VUB)  
+**Institution:** Université Libre de Bruxelles (ULB) / Vrije Universiteit Brussel (VUB)  
 **Year:** 2023-2024
 
 **Supervisor:** Ir. Jonathan Vrijsen, ETRO Laboratory
@@ -232,4 +232,4 @@ Special thanks to:
 
 ---
 
-If you find this project interesting, please give it a star!
+⭐ **If you find this project interesting, please give it a star!**
